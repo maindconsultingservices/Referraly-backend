@@ -1,0 +1,89 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id                 Int       @id @default(autoincrement())
+  username           String    @unique
+  email              String    @unique
+  passwordHash       String
+  firstName          String
+  lastName           String
+  gender             String?
+  phoneNumber        String?
+  dateOfBirth        DateTime?
+  address            String?
+  languagePreference String    @default("en")
+  createdAt          DateTime  @default(now())
+  updatedAt          DateTime  @updatedAt
+  lastLogin          DateTime?
+  isActive           Boolean   @default(true)
+  gdprConsent        Boolean   @default(false)
+  gdprConsentDate    DateTime?
+  role               String    @default("user")
+  recommendations    Recommendation[]
+  externalAffiliateIds ExternalAffiliateId[]
+}
+
+model AffiliateProgram {
+  id               Int       @id @default(autoincrement())
+  name             String
+  tags             String[]
+  sharedAffiliateId String?
+  commissionRate   Float
+  cookieDuration   Int
+  payoutThreshold  Float
+  websiteUrl       String
+  createdAt        DateTime  @default(now())
+  updatedAt        DateTime  @updatedAt
+  externalAffiliateIds ExternalAffiliateId[]
+  recommendations  Recommendation[]
+}
+
+model ExternalAffiliateId {
+  id         Int      @id @default(autoincrement())
+  user       User     @relation(fields: [userId], references: [id])
+  userId     Int
+  program    AffiliateProgram @relation(fields: [programId], references: [id])
+  programId  Int
+  externalId String   @unique
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+model Recommendation {
+  id         Int       @id @default(autoincrement())
+  user       User      @relation(fields: [userId], references: [id])
+  userId     Int
+  content    String
+  program    AffiliateProgram @relation(fields: [programId], references: [id])
+  programId  Int
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+  isActive   Boolean   @default(true)
+}
+
+model UIMessage {
+  id          Int      @id @default(autoincrement())
+  messageKey  String
+  languageCode String
+  messageText String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@unique([messageKey, languageCode])
+}
+
+model Referral {
+  id                Int      @id @default(autoincrement())
+  user              User     @relation(fields: [userId], references: [id])
+  userId            Int
+  originalLink      String
+  convertedLink     String
+  timestamp         DateTime @default(now())
+}
