@@ -1,9 +1,9 @@
-package com.referally.viewmodel
+package com.referally.ui.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.referally.datastore.UserPreferences
-import com.referally.repository.LanguageRepository
+import com.referally.ui.datastore.UserPreferences
+import com.referally.ui.repository.LanguageRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.first
