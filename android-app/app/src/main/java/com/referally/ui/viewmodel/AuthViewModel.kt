@@ -1,9 +1,9 @@
-package com.example.appname.viewmodel
+package com.referally.ui.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.appname.repository.AuthRepository
-import com.example.appname.model.UIState
+import com.referally.ui.repository.AuthRepository 
+import com.referally.ui.model.UIState
 import kotlinx.coroutines.launch
 
 class AuthViewModel(private val repository: AuthRepository = AuthRepository()) : ViewModel() {
