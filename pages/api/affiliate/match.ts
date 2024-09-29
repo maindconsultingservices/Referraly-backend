@@ -1,13 +1,14 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import prisma from '../../../utils/db';
+import { sql } from '@vercel/postgres';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const { content } = req.body;
 
-  const programs = await prisma.affiliateProgram.findMany();
+  const result = await sql`SELECT * FROM affiliate_programs;`;
+  const programs = result.rows;
 
   const matchedProgram = programs.find(program =>
-    program.tags.some(tag => content.includes(tag))
+    program.tags.some((tag: string) => content.includes(tag))
   );
 
   if (matchedProgram) {
