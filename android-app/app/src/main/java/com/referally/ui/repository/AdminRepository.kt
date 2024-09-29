@@ -1,7 +1,7 @@
-package com.referally.repository
+package com.referally.ui.repository
 
-import com.referally.model.AdminDashboardData
-import com.referally.network.ApiService
+import com.referally.ui.model.AdminDashboardData
+import com.referally.ui.network.ApiService
 
 class AdminRepository(private val apiService: ApiService = ApiService.create()) {
 
