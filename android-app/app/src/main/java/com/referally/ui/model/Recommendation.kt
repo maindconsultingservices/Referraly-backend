@@ -1,4 +1,4 @@
-package com.example.appname.model
+package com.referally.ui.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
