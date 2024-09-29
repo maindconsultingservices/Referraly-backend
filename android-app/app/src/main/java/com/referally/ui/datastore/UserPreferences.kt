@@ -1,4 +1,4 @@
-package com.example.appname.datastore
+package com.referally.ui.datastore
 
 import android.content.Context
 import androidx.datastore.preferences.core.*
