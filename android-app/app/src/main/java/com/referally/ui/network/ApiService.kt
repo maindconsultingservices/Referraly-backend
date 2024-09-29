@@ -1,4 +1,4 @@
-package com.example.appname.network
+package com.referally.ui.network
 
 import com.example.appname.model.*
 import okhttp3.Interceptor
