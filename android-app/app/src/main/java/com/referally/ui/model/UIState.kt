@@ -1,4 +1,4 @@
-package com.example.appname.model
+package com.referally.ui.model
 
 data class UIState(
     val isLoading: Boolean = false,
