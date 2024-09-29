@@ -1,10 +1,10 @@
-package com.example.appname.ui.screens
+package com.referally.ui.screens
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.appname.viewmodel.AdminViewModel
+import com.referally.ui.viewmodel.AdminViewModel
 
 @Composable
 fun AdminDashboardScreen(navController: NavHostController, viewModel: AdminViewModel = viewModel()) {
