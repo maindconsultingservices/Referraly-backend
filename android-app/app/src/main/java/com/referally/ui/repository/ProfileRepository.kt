@@ -1,7 +1,7 @@
-package com.referally.repository
+package com.referally.ui.repository
 
-import com.referally.model.UserProfile
-import com.referally.network.ApiService
+import com.referally.ui.model.UserProfile
+import com.referally.ui.network.ApiService
 
 class ProfileRepository(private val apiService: ApiService = ApiService.create()) {
 
