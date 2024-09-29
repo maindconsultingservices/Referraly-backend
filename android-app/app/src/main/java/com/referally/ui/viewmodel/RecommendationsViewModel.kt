@@ -1,10 +1,10 @@
-package com.referally.viewmodel
+package com.referally.ui.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.referally.model.Recommendation
-import com.referally.model.UIState
-import com.referally.repository.RecommendationsRepository
+import com.referally.ui.model.Recommendation
+import com.referally.ui.model.UIState
+import com.referally.ui.repository.RecommendationsRepository
 import kotlinx.coroutines.launch
 
 class RecommendationsViewModel(private val repository: RecommendationsRepository = RecommendationsRepository()) : ViewModel() {
