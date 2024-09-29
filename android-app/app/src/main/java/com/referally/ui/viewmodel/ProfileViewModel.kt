@@ -1,10 +1,10 @@
-package com.referally.viewmodel
+package com.referally.ui.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.referally.model.UserProfile
-import com.referally.model.UIState
-import com.referally.repository.ProfileRepository
+import com.referally.ui.model.UserProfile
+import com.referally.ui.model.UIState
+import com.referally.ui.repository.ProfileRepository
 import kotlinx.coroutines.launch
 
 class ProfileViewModel(private val repository: ProfileRepository = ProfileRepository()) : ViewModel() {
