@@ -1,15 +1,16 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import prisma from '../../../utils/db';
+import { sql } from '@vercel/postgres';
 import { authMiddleware } from '../../../middleware/authMiddleware';
 
 async function handler(req: NextApiRequest, res: NextApiResponse) {
   const userId = req.body.userId;
   const { languagePreference } = req.body;
 
-  await prisma.user.update({
-    where: { id: userId },
-    data: { languagePreference },
-  });
+  await sql`
+    UPDATE users
+    SET language_preference = ${languagePreference}
+    WHERE id = ${userId};
+  `;
 
   res.status(200).json({ message: 'Language preference updated' });
 }
