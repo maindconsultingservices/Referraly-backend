@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import prisma from '../../../utils/db';
+import { sql } from '@vercel/postgres';
 import { comparePassword } from '../../../utils/encryption';
 import { generateToken } from '../../../utils/auth';
 
@@ -7,20 +7,22 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   try {
     const { email, password } = req.body;
 
-    const user = await prisma.user.findUnique({ where: { email } });
-    if (!user) return res.status(400).json({ error: 'Invalid credentials' });
+    const result = await sql`SELECT id, password_hash, language_preference, role FROM users WHERE email = ${email};`;
 
-    const isMatch = await comparePassword(password, user.passwordHash);
+    if (result.rowCount === 0) {
+      return res.status(400).json({ error: 'Invalid credentials' });
+    }
+
+    const user = result.rows[0];
+
+    const isMatch = await comparePassword(password, user.password_hash);
     if (!isMatch) return res.status(400).json({ error: 'Invalid credentials' });
 
     const token = generateToken(user.id);
 
-    await prisma.user.update({
-      where: { id: user.id },
-      data: { lastLogin: new Date() },
-    });
+    await sql`UPDATE users SET last_login = NOW() WHERE id = ${user.id};`;
 
-    res.status(200).json({ token, languagePreference: user.languagePreference, role: user.role });
+    res.status(200).json({ token, languagePreference: user.language_preference, role: user.role });
   } catch (error: any) {
     res.status(400).json({ error: error.message });
   }
