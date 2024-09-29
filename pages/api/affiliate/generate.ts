@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import prisma from '../../../utils/db';
 import { authMiddleware } from '../../../middleware/authMiddleware';
-import { generateExternalAffiliateId } from '../../../utils/affiliate';
+import crypto from 'crypto';
 
 async function handler(req: NextApiRequest, res: NextApiResponse) {
   const userId = req.body.userId;
@@ -9,7 +9,9 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
 
   const secretKey = process.env.SECRET_KEY!;
 
-  const externalId = generateExternalAffiliateId(userId, programId, secretKey);
+  const data = `${userId}-${programId}`;
+  const hash = crypto.createHmac('sha256', secretKey).update(data).digest('hex');
+  const externalId = hash.substring(0, 12);
 
   await prisma.externalAffiliateId.create({
     data: { userId, programId, externalId },
