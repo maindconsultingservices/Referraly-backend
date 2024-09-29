@@ -1,4 +1,4 @@
-package com.example.appname.model
+package com.referally.ui.model
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
