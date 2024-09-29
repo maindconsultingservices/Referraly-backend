@@ -1,10 +1,10 @@
-package com.referally.viewmodel
+package com.referally.ui.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.referally.model.AdminDashboardData
-import com.referally.model.UIState
-import com.referally.repository.AdminRepository
+import com.referally.ui.model.AdminDashboardData
+import com.referally.ui.model.UIState
+import com.referally.ui.repository.AdminRepository
 import kotlinx.coroutines.launch
 
 class AdminViewModel(private val repository: AdminRepository = AdminRepository()) : ViewModel() {
