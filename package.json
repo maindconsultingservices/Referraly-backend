@@ -7,11 +7,11 @@
     "start": "next start"
   },
   "dependencies": {
-    "@vercel/postgres": "^1.0.0",
+    "@vercel/postgres": "^0.10.0",
     "bcryptjs": "^2.4.3",
-    "jsonwebtoken": "^9.0.0",
-    "next": "^13.4.10",
-    "yup": "^1.0.0"
+    "jsonwebtoken": "^9.0.2",
+    "next": "^14.2.13",
+    "yup": "^1.4.0"
   },
   "devDependencies": {
     "typescript": "^5.0.4"
