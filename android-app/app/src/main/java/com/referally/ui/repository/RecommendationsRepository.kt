@@ -1,8 +1,8 @@
-package com.referally.repository
+package com.referally.ui.repository
 
-import com.referally.model.Recommendation
-import com.referally.network.ApiService
-import com.referally.model.AppDatabase
+import com.referally.ui.model.Recommendation
+import com.referally.ui.network.ApiService
+import com.referally.ui.model.AppDatabase
 
 class RecommendationsRepository(
     private val apiService: ApiService = ApiService.create(),
