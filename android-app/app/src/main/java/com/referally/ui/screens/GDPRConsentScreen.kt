@@ -1,10 +1,11 @@
-package com.example.appname.ui.screens
+package com.referally.ui.screens
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.navigation.NavHostController
-import com.example.appname.viewmodel.GDPRViewModel
+import com.referally.ui.screens.viewmodel.GDPRViewModel
+
 
 @Composable
 fun GDPRConsentScreen(navController: NavHostController, viewModel: GDPRViewModel = viewModel()) {
