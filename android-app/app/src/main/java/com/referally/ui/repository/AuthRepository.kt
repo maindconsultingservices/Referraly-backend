@@ -1,4 +1,4 @@
-package com.example.appname.repository
+package com.referally.ui.repository
 
 import com.example.appname.network.ApiService
 import com.example.appname.datastore.UserPreferences
