@@ -23,7 +23,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     // Check if user already exists
     const existingUser = await sql`SELECT id FROM users WHERE email = ${email} OR username = ${username};`;
 
-    if (existingUser.rowCount > 0) {
+    if (existingUser && existingUser.rowCount && existingUser.rowCount > 0) {
       return res.status(400).json({ error: 'User already exists' });
     }
 
