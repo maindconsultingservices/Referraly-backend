@@ -1,0 +1,19 @@
+{
+  "name": "referally-backend",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "@vercel/postgres": "^1.0.0",
+    "bcryptjs": "^2.4.3",
+    "jsonwebtoken": "^9.0.0",
+    "next": "^13.4.10",
+    "yup": "^1.0.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.4"
+  }
+}
