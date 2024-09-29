@@ -1,11 +1,12 @@
-package com.example.appname.ui.screens
+package com.referally.ui.screens
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
-import com.example.appname.viewmodel.AuthViewModel
+import com.referally.ui.viewmodel.AuthViewModel
+
 
 @Composable
 fun LoginScreen(navController: NavHostController, viewModel: AuthViewModel = viewModel()) {
