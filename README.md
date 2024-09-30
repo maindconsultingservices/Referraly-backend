@@ -147,6 +147,132 @@ The database uses Vercel Postgres and consists of the following tables:
 | created_at    | timestamp without time zone | DEFAULT NOW        |
 | updated_at    | timestamp without time zone | DEFAULT NOW        |
 
+The `ui_messages` table is the only table that needs to be populated with data before the application can run properly. This table contains all the user interface messages in different languages, allowing for easy localization of the application. Below are the SQL queries needed to populate this table with the initial set of messages:
+
+```sql
+INSERT INTO ui_messages (message_key, language_code, message_text, created_at, updated_at) VALUES
+('gdpr_title', 'en', 'GDPR Consent', NOW(), NOW()),
+('gdpr_title', 'es', 'Consentimiento GDPR', NOW(), NOW()),
+('login_email_label', 'en', 'Email', NOW(), NOW()),
+('login_button', 'en', 'Login', NOW(), NOW()),
+('profile_address_label', 'es', 'Dirección', NOW(), NOW()),
+('profile_save_button', 'en', 'Save', NOW(), NOW()),
+('profile_save_button', 'es', 'Guardar', NOW(), NOW()),
+('profile_change_language_button', 'en', 'Change Language', NOW(), NOW()),
+('profile_change_language_button', 'es', 'Cambiar idioma', NOW(), NOW()),
+('profile_logout_button', 'en', 'Logout', NOW(), NOW()),
+('profile_logout_button', 'es', 'Cerrar sesión', NOW(), NOW()),
+('profile_update_success', 'en', 'Profile updated successfully', NOW(), NOW()),
+('profile_update_success', 'es', 'Perfil actualizado correctamente', NOW(), NOW()),
+('gdpr_message', 'en', 'We need your consent to process your data...', NOW(), NOW()),
+('gdpr_message', 'es', 'Necesitamos tu consentimiento para procesar tus datos...', NOW(), NOW()),
+('recommendations_profile_button', 'es', 'Perfil', NOW(), NOW()),
+('recommendation_detail_title', 'en', 'Recommendation Detail', NOW(), NOW()),
+('recommendation_detail_title', 'es', 'Detalle de la recomendación', NOW(), NOW()),
+('share_processing_message', 'en', 'Processing shared content...', NOW(), NOW()),
+('share_processing_message', 'es', 'Procesando contenido compartido...', NOW(), NOW()),
+('share_no_match_found', 'en', 'No matching affiliate program found', NOW(), NOW()),
+('share_no_match_found', 'es', 'No se encontró un programa de afiliados coincidente', NOW(), NOW()),
+('share_match_found', 'en', 'Match found: {programName}', NOW(), NOW()),
+('share_match_found', 'es', 'Se encontró coincidencia: {programName}', NOW(), NOW()),
+('login_title', 'en', 'Login', NOW(), NOW()),
+('admin_dashboard_title', 'en', 'Admin Dashboard', NOW(), NOW()),
+('admin_dashboard_title', 'es', 'Panel de administración', NOW(), NOW()),
+('admin_total_users', 'en', 'Total Users: {count}', NOW(), NOW()),
+('admin_total_users', 'es', 'Total de usuarios: {count}', NOW(), NOW()),
+('admin_total_recommendations', 'en', 'Total Recommendations: {count}', NOW(), NOW()),
+('admin_total_recommendations', 'es', 'Total de recomendaciones: {count}', NOW(), NOW()),
+('admin_total_affiliate_programs', 'en', 'Total Affiliate Programs: {count}', NOW(), NOW()),
+('admin_total_affiliate_programs', 'es', 'Total de programas de afiliados: {count}', NOW(), NOW()),
+('error_generic', 'en', 'An error occurred. Please try again.', NOW(), NOW()),
+('error_generic', 'es', 'Ocurrió un error. Por favor, inténtalo de nuevo.', NOW(), NOW()),
+('error_network', 'en', 'Network error. Please check your internet connection.', NOW(), NOW()),
+('error_network', 'es', 'Error de red. Por favor, verifica tu conexión a internet.', NOW(), NOW()),
+('error_server', 'en', 'Server error. Please try again later.', NOW(), NOW()),
+('error_server', 'es', 'Error del servidor. Por favor, inténtalo más tarde.', NOW(), NOW()),
+('logout_confirmation', 'en', 'Are you sure you want to logout?', NOW(), NOW()),
+('logout_confirmation', 'es', '¿Estás seguro de que deseas cerrar sesión?', NOW(), NOW()),
+('delete_confirmation', 'en', 'Are you sure you want to delete this?', NOW(), NOW()),
+('delete_confirmation', 'es', '¿Estás seguro de que deseas eliminar esto?', NOW(), NOW()),
+('yes', 'es', 'Sí', NOW(), NOW()),
+('no', 'en', 'No', NOW(), NOW()),
+('no', 'es', 'No', NOW(), NOW()),
+('recommendation_update_success', 'en', 'Recommendation updated successfully', NOW(), NOW()),
+('recommendation_update_success', 'es', 'Recomendación actualizada correctamente', NOW(), NOW()),
+('recommendation_delete_success', 'en', 'Recommendation deleted successfully', NOW(), NOW()),
+('recommendation_delete_success', 'es', 'Recomendación eliminada correctamente', NOW(), NOW()),
+('required_field', 'en', 'This field is required', NOW(), NOW()),
+('required_field', 'es', 'Este campo es obligatorio', NOW(), NOW()),
+('invalid_email', 'en', 'Invalid email address', NOW(), NOW()),
+('invalid_email', 'es', 'Dirección de correo electrónico inválida', NOW(), NOW()),
+('password_min_length', 'en', 'Password must be at least {minLength} characters', NOW(), NOW()),
+('password_min_length', 'es', 'La contraseña debe tener al menos {minLength} caracteres', NOW(), NOW()),
+('password_mismatch', 'en', 'Passwords do not match', NOW(), NOW()),
+('password_mismatch', 'es', 'Las contraseñas no coinciden', NOW(), NOW()),
+('loading', 'en', 'Loading...', NOW(), NOW()),
+('loading', 'es', 'Cargando...', NOW(), NOW()),
+('welcome_message', 'en', 'Welcome, {firstName}!', NOW(), NOW()),
+('welcome_message', 'es', '¡Bienvenido, {firstName}!', NOW(), NOW()),
+('login_title', 'es', 'Iniciar sesión', NOW(), NOW()),
+('login_email_label', 'es', 'Correo electrónico', NOW(), NOW()),
+('login_password_label', 'en', 'Password', NOW(), NOW()),
+('login_password_label', 'es', 'Contraseña', NOW(), NOW()),
+('login_button', 'es', 'Iniciar sesión', NOW(), NOW()),
+('login_register_prompt', 'en', 'Don''t have an account? Register', NOW(), NOW()),
+('login_register_prompt', 'es', '¿No tienes una cuenta? Regístrate', NOW(), NOW()),
+('login_error_invalid_credentials', 'en', 'Invalid credentials', NOW(), NOW()),
+('login_error_invalid_credentials', 'es', 'Credenciales inválidas', NOW(), NOW()),
+('register_title', 'en', 'Register', NOW(), NOW()),
+('register_title', 'es', 'Registrarse', NOW(), NOW()),
+('register_username_label', 'en', 'Username', NOW(), NOW()),
+('register_username_label', 'es', 'Nombre de usuario', NOW(), NOW()),
+('register_email_label', 'en', 'Email', NOW(), NOW()),
+('register_email_label', 'es', 'Correo electrónico', NOW(), NOW()),
+('register_first_name_label', 'en', 'First Name', NOW(), NOW()),
+('register_first_name_label', 'es', 'Nombre', NOW(), NOW()),
+('register_last_name_label', 'en', 'Last Name', NOW(), NOW()),
+('register_last_name_label', 'es', 'Apellido', NOW(), NOW()),
+('register_password_label', 'en', 'Password', NOW(), NOW()),
+('register_password_label', 'es', 'Contraseña', NOW(), NOW()),
+('register_button', 'en', 'Register', NOW(), NOW()),
+('register_button', 'es', 'Registrarse', NOW(), NOW()),
+('register_error_user_exists', 'en', 'User already exists', NOW(), NOW()),
+('register_error_user_exists', 'es', 'El usuario ya existe', NOW(), NOW()),
+('profile_title', 'en', 'Profile', NOW(), NOW()),
+('profile_title', 'es', 'Perfil', NOW(), NOW()),
+('profile_first_name_label', 'en', 'First Name', NOW(), NOW()),
+('profile_first_name_label', 'es', 'Nombre', NOW(), NOW()),
+('profile_last_name_label', 'en', 'Last Name', NOW(), NOW()),
+('profile_last_name_label', 'es', 'Apellido', NOW(), NOW()),
+('profile_gender_label', 'en', 'Gender', NOW(), NOW()),
+('profile_gender_label', 'es', 'Género', NOW(), NOW()),
+('profile_phone_number_label', 'en', 'Phone Number', NOW(), NOW()),
+('profile_phone_number_label', 'es', 'Número de teléfono', NOW(), NOW()),
+('profile_date_of_birth_label', 'en', 'Date of Birth', NOW(), NOW()),
+('profile_date_of_birth_label', 'es', 'Fecha de nacimiento', NOW(), NOW()),
+('profile_address_label', 'en', 'Address', NOW(), NOW()),
+('gdpr_consent_button', 'en', 'I Consent', NOW(), NOW()),
+('gdpr_consent_button', 'es', 'Consiento', NOW(), NOW()),
+('gdpr_consent_recorded', 'en', 'GDPR consent recorded', NOW(), NOW()),
+('gdpr_consent_recorded', 'es', 'Consentimiento GDPR registrado', NOW(), NOW()),
+('language_selection_title', 'en', 'Select Language', NOW(), NOW()),
+('language_selection_title', 'es', 'Seleccionar idioma', NOW(), NOW()),
+('language_english', 'en', 'English', NOW(), NOW()),
+('language_english', 'es', 'Inglés', NOW(), NOW()),
+('language_spanish', 'en', 'Spanish', NOW(), NOW()),
+('language_spanish', 'es', 'Español', NOW(), NOW()),
+('language_update_success', 'en', 'Language preference updated', NOW(), NOW()),
+('language_update_success', 'es', 'Preferencia de idioma actualizada', NOW(), NOW()),
+('recommendations_title', 'en', 'Recommendations', NOW(), NOW()),
+('recommendations_title', 'es', 'Recomendaciones', NOW(), NOW()),
+('recommendations_add_button', 'en', 'Add Recommendation', NOW(), NOW()),
+('recommendations_add_button', 'es', 'Agregar recomendación', NOW(), NOW()),
+('recommendations_profile_button', 'en', 'Profile', NOW(), NOW()),
+('yes', 'en', 'Yes', NOW(), NOW());
+```
+
+These queries will populate the `ui_messages` table with all the necessary UI text in both English and Spanish. This table should be populated before the application is run for the first time to ensure proper localization functionality.
+
 ## Environment Variables
 
 The following environment variables are required for the proper functioning of the Referraly backend:
@@ -170,19 +296,15 @@ The following environment variables are required for the proper functioning of t
 - **Purpose**: A boolean flag to enable or disable the use of shared affiliate IDs.
 - **Usage**: Throughout the application where affiliate IDs are generated or used.
 - **Example**: `SHARED_AFFILIATE_IDS=true`
-- **Why it's used**: To easily switch between shared affiliate IDs and individual user affiliate IDs, providing flexibility in the affiliate system.
-
-### ADMIN_USERS
-
-- **Purpose**: A comma-separated list of email addresses for users who should have admin privileges.
-- **Usage**: In the user registration process (`/api/users/register`).
-- **Example**: `ADMIN_USERS=admin@example.com,superuser@example.com`
-- **Why it's used**: To automatically assign admin roles to specific users upon registration, simplifying the admin user creation process.
+- **Why it's used**: To control the affiliate ID generation strategy. 
+- **Detailed explanation**: 
+  - When set to "true" (initial setup): All users share 5 master affiliate IDs (one per program). This simplifies the system for the first iterations of the app, reducing complexity and API calls to affiliate programs.
+  - When set to "false" (future implementation): The system will generate unique affiliate IDs for each user-program combination. This more advanced setup allows for better tracking and potentially higher commissions but requires integration with each affiliate program's API.
 
 ### AFFILIATE_ID_1 to AFFILIATE_ID_5
 
-- **Purpose**: These variables store the actual affiliate IDs for each of the five affiliate programs.
-- **Usage**: When generating external affiliate IDs and in affiliate-related operations.
+- **Purpose**: These variables store the master affiliate IDs for each of the five affiliate programs.
+- **Usage**: When `SHARED_AFFILIATE_IDS` is set to "true", these IDs are used for all users across the platform.
 - **Example**: 
   ```
   AFFILIATE_ID_1=aff_123456
@@ -191,12 +313,12 @@ The following environment variables are required for the proper functioning of t
   AFFILIATE_ID_4=associate_901234
   AFFILIATE_ID_5=promo_567890
   ```
-- **Why they're used**: To keep the actual affiliate IDs secure and easily configurable without changing the code.
+- **Why they're used**: In the initial phase with shared affiliate IDs, these master IDs simplify tracking and management of affiliate links. They allow the platform to start operating without the complexity of individual user-program affiliate ID generation.
 
 ### AFFILIATE_API_KEY_1 to AFFILIATE_API_KEY_5
 
 - **Purpose**: These variables store the API keys for each of the five affiliate programs.
-- **Usage**: In API calls to the respective affiliate programs (not implemented in the current code, but prepared for future use).
+- **Usage**: For future implementation when `SHARED_AFFILIATE_IDS` is set to "false". They will be used in API calls to the respective affiliate programs to generate unique user-specific affiliate IDs.
 - **Example**: 
   ```
   AFFILIATE_API_KEY_1=abcdef123456
@@ -205,7 +327,14 @@ The following environment variables are required for the proper functioning of t
   AFFILIATE_API_KEY_4=stuvwx901234
   AFFILIATE_API_KEY_5=yzabcd567890
   ```
-- **Why they're used**: To authenticate API requests to the affiliate programs securely, keeping the keys out of the codebase.
+- **Why they're used**: To authenticate API requests to the affiliate programs securely, keeping the keys out of the codebase. In the future, these will be crucial for generating unique affiliate IDs for each user-program combination, allowing for more granular tracking and potentially higher commissions.
+
+### ADMIN_USERS
+
+- **Purpose**: A comma-separated list of email addresses for users who should have admin privileges.
+- **Usage**: In the user registration process (`/api/users/register`).
+- **Example**: `ADMIN_USERS=admin@example.com,superuser@example.com`
+- **Why it's used**: To automatically assign admin roles to specific users upon registration, simplifying the admin user creation process.
 
 ### Additional Database-Related Environment Variables
 
@@ -222,28 +351,6 @@ When using Vercel Postgres, you typically don't need to set these manually as Ve
 These database-related variables are automatically set by Vercel when you link a Postgres database to your project.
 
 ## Development and Deployment
-
-### Setting Up the Development Environment
-
-1. Clone the repository:
-   ```
-   git clone https://github.com/your-username/referraly-backend.git
-   cd referraly-backend
-   ```
-
-2. Install dependencies:
-   ```
-   npm install
-   ```
-
-3. Set up environment variables:
-   - Create a `.env.local` file in the root of your project.
-   - Add all the required environment variables to this file.
-
-4. Run the development server:
-   ```
-   npm run dev
-   ```
 
 ### Deployment
 
