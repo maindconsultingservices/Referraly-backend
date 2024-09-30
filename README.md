@@ -223,6 +223,28 @@ These database-related variables are automatically set by Vercel when you link a
 
 ## Development and Deployment
 
+### Setting Up the Development Environment
+
+1. Clone the repository:
+   ```
+   git clone https://github.com/your-username/referraly-backend.git
+   cd referraly-backend
+   ```
+
+2. Install dependencies:
+   ```
+   npm install
+   ```
+
+3. Set up environment variables:
+   - Create a `.env.local` file in the root of your project.
+   - Add all the required environment variables to this file.
+
+4. Run the development server:
+   ```
+   npm run dev
+   ```
+
 ### Deployment
 
 For deployment on Vercel:
@@ -235,99 +257,94 @@ For deployment on Vercel:
    - Add each variable and its value.
 4. Deploy your application.
 
+Remember to never commit your `.env.local` file or any file containing actual secret values to version control. Always use placeholder values in example configurations and documentation.
+
 ## Mobile App Integration
 
-This section outlines how a mobile app front-end should correctly leverage the API endpoints provided by this backend.
+To integrate a mobile app frontend with the Referraly backend, follow these guidelines for API usage and UI/UX design:
 
-### Authentication Flow
+### API Integration
 
-1. **User Registration**:
-   - Endpoint: `POST /api/users/register`
-   - The app should collect user information and send it to this endpoint.
-   - Store the returned token securely (e.g., in encrypted storage).
+1. **Authentication**:
+   - Use the `/api/users/login` endpoint to authenticate users.
+   - Store the returned JWT token securely (e.g., in secure storage or keychain).
+   - Include the JWT token in the `Authorization` header for all authenticated requests.
 
-2. **User Login**:
-   - Endpoint: `POST /api/users/login`
-   - Send user credentials and store the returned token securely.
-   - Use this token for all subsequent authenticated requests.
+2. **User Management**:
+   - Implement a registration flow using the `/api/users/register` endpoint.
+   - Fetch and display user profile information using `/api/users/profile`.
+   - Allow users to update their profile with `/api/users/profile` (PUT request).
+   - Implement GDPR consent management using `/api/users/gdpr-consent`.
+   - Allow language preference updates with `/api/users/language`.
 
-3. **Token Management**:
-   - Include the token in the `Authorization` header of all authenticated requests.
-   - Format: `Bearer <token>`
-   - Implement token refresh logic if needed (endpoint not provided in current API).
+3. **Recommendations**:
+   - Fetch user recommendations using `/api/recommendations`.
+   - Implement creation, updating, and deletion of recommendations using the respective endpoints.
 
-### User Profile Management
+4. **Affiliate Programs**:
+   - Fetch affiliate program details when needed using `/api/affiliate/[programId]`.
+   - Generate external affiliate IDs when required with `/api/affiliate/generate`.
+   - Use `/api/affiliate/match` to suggest relevant affiliate programs for user content.
 
-1. **Fetch User Profile**:
-   - Endpoint: `GET /api/users/profile`
-   - Call this endpoint after successful login to get user details.
+5. **Localization**:
+   - Fetch UI messages for the user's preferred language using `/api/ui-messages/[languageCode]`.
 
-2. **Update User Profile**:
-   - Endpoint: `PUT /api/users/profile`
-   - Allow users to edit their profile information in the app.
+### UI/UX Design
 
-3. **GDPR Consent**:
-   - Endpoint: `PUT /api/users/gdpr-consent`
-   - Implement a GDPR consent flow in the app and update the backend when user consents.
+1. **Onboarding**:
+   - Welcome screen
+   - Registration form
+   - Login screen
+   - GDPR consent screen
 
-4. **Language Preference**:
-   - Endpoint: `PUT /api/users/language`
-   - Allow users to change their language preference in the app settings.
+2. **Main Navigation**:
+   - Home/Feed
+   - Create Recommendation
+   - Profile
+   - Settings
 
-### Recommendations
+3. **Home/Feed Screen**:
+   - List of user's recommendations
+   - Pull-to-refresh functionality
+   - Infinite scroll for pagination
 
-1. **Fetch Recommendations**:
-   - Endpoint: `GET /api/recommendations`
-   - Use this to populate the main feed or recommendations list in the app.
+4. **Create Recommendation Screen**:
+   - Text input for recommendation content
+   - Affiliate program selector (use `/api/affiliate/match` for suggestions)
+   - Preview of generated affiliate link
 
-2. **Create Recommendation**:
-   - Endpoint: `POST /api/recommendations`
-   - Implement a feature for users to create new recommendations.
+5. **Profile Screen**:
+   - Display user information
+   - Edit profile button
+   - List of user's active recommendations
 
-3. **Update Recommendation**:
-   - Endpoint: `PUT /api/recommendations/[id]`
-   - Allow users to edit their own recommendations.
+6. **Settings Screen**:
+   - Language preference selector
+   - GDPR consent management
+   - Logout option
 
-4. **Delete Recommendation**:
-   - Endpoint: `DELETE /api/recommendations/[id]`
-   - Provide an option for users to delete their recommendations.
+7. **Recommendation Detail Screen**:
+   - Display full recommendation content
+   - Show associated affiliate program details
+   - Edit and delete options for user's own recommendations
 
-### Affiliate Program Integration
+8. **Affiliate Program Detail Screen**:
+   - Display program details (commission rate, payout threshold, etc.)
+   - List of user's recommendations for this program
 
-1. **Fetch Affiliate Program Details**:
-   - Endpoint: `GET /api/affiliate/[programId]`
-   - Use this to display details about specific affiliate programs.
-
-2. **Generate External Affiliate ID**:
-   - Endpoint: `POST /api/affiliate/generate`
-   - Call this when a user wants to participate in an affiliate program.
-
-3. **Match Content with Affiliate Programs**:
-   - Endpoint: `POST /api/affiliate/match`
-   - Use this to suggest relevant affiliate programs based on user-generated content.
-
-### Localization
-
-1. **Fetch UI Messages**:
-   - Endpoint: `GET /api/ui-messages/[languageCode]`
-   - Call this endpoint when the app starts or when the user changes language.
-   - Use the returned messages for all UI text in the app.
-
-### Admin Features
-
-1. **Admin Dashboard**:
-   - Endpoint: `GET /api/admin/dashboard`
-   - If implementing admin features in the mobile app, use this endpoint to fetch admin-specific data.
-   - Ensure proper access control in the app UI based on user role.
+9. **Admin Dashboard** (for admin users):
+   - Overview of platform statistics
+   - User management features
+   - Affiliate program management
 
 ### Best Practices
 
-1. **Error Handling**: Implement robust error handling for all API calls. Display user-friendly error messages.
-2. **Loading States**: Show loading indicators while waiting for API responses.
-3. **Caching**: Implement appropriate caching strategies to reduce API calls and improve app performance.
-4. **Offline Support**: Consider implementing offline support for critical features.
-5. **Security**: Ensure all sensitive data is encrypted in transit and at rest.
-6. **Rate Limiting**: Implement client-side rate limiting to prevent API abuse.
-7. **Versioning**: Be prepared to handle API versioning in the future.
+1. Implement proper error handling and display user-friendly error messages.
+2. Use loading indicators for asynchronous operations.
+3. Implement offline support where possible, syncing data when the connection is restored.
+4. Ensure the app follows platform-specific design guidelines (Material Design for Android, Human Interface Guidelines for iOS).
+5. Implement deep linking for easy sharing of recommendations.
+6. Use secure storage for sensitive data like tokens and user information.
+7. Implement analytics to track user engagement and app performance.
 
-By following these guidelines, your mobile app can effectively integrate with the Referraly backend, providing a smooth and feature-rich experience for users.
+By following these guidelines, you can create a mobile app that effectively leverages the Referraly backend API and provides a user-friendly experience for managing recommendations and affiliate links.
